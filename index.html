@@ -18,15 +18,14 @@
             line-height: 1.6;
         }
 
-        /* Barra de Navegación */
         .navbar {
             background-color: rgba(0, 0, 0, 0.9);
             padding: 15px 0;
             position: fixed;
-            top: 0;
+            bottom: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 -2px 10px rgba(255, 255, 255, 0.1);
         }
 
         .nav-container {
@@ -34,8 +33,23 @@
             margin: 0 auto;
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 30px;
             padding: 0 20px;
+        }
+
+        .search-text {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 20px;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
         }
 
         .nav-btn {
@@ -61,14 +75,12 @@
             background: linear-gradient(45deg, #ff6b35, #f7931e);
         }
 
-        /* Contenedor Principal */
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 100px 20px 20px;
+            padding: 20px 20px 100px;
         }
 
-        /* Secciones */
         .section {
             display: none;
             min-height: 80vh;
@@ -84,7 +96,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Sección Inicio */
         .home-section {
             text-align: center;
             padding: 60px 0;
@@ -115,7 +126,6 @@
             margin-right: auto;
         }
 
-        /* Sección Menú */
         .menu-section h2 {
             text-align: center;
             font-size: 60px;
@@ -161,22 +171,21 @@
             color: #ff6b35;
         }
 
-        /* Sección Contacto */
-        .contact-section h2 {
+        .pedidos-section h2 {
             text-align: center;
             font-size: 60px;
             margin-bottom: 50px;
             color: #ffd700;
         }
 
-        .contact-grid {
+        .pedidos-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 40px;
             margin-top: 40px;
         }
 
-        .contact-card {
+        .pedidos-card {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
             border-radius: 20px;
@@ -184,22 +193,59 @@
             border: 2px solid rgba(255, 215, 0, 0.3);
         }
 
-        .contact-icon {
+        .pedidos-icon {
             font-size: 50px;
             margin-bottom: 20px;
         }
 
-        .contact-card h3 {
+        .pedidos-card h3 {
             color: #ffd700;
             font-size: 24px;
             margin-bottom: 15px;
         }
 
-        .contact-card p {
+        .pedidos-card p {
             font-size: 18px;
         }
 
-        /* Responsive */
+        .social-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .social-section h3 {
+            color: #ffd700;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.15);
+        }
+
+        .social-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        .social-name {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
         @media screen and (max-width: 768px) {
             h1 {
                 font-size: 60px;
@@ -207,6 +253,16 @@
 
             .nav-container {
                 gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .search-text {
+                font-size: 14px;
+                margin-right: 10px;
+                order: -1;
+                flex-basis: 100%;
+                text-align: center;
+                margin-bottom: 10px;
             }
 
             .nav-btn {
@@ -215,7 +271,7 @@
             }
 
             .menu-section h2,
-            .contact-section h2 {
+            .pedidos-section h2 {
                 font-size: 40px;
             }
 
@@ -226,6 +282,14 @@
 
             .home-text {
                 font-size: 18px;
+            }
+
+            .social-section h3 {
+                font-size: 28px;
+            }
+
+            .social-links {
+                gap: 30px;
             }
         }
 
@@ -245,23 +309,22 @@
             }
 
             .container {
-                padding: 120px 15px 15px;
+                padding: 15px 15px 120px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Barra de Navegación -->
     <nav class="navbar">
         <div class="nav-container">
+            <span class="search-text">presiona estos botones 👉</span>
             <button class="nav-btn active" onclick="showSection('home')">INICIO</button>
             <button class="nav-btn" onclick="showSection('menu')">MENÚ</button>
-            <button class="nav-btn" onclick="showSection('contact')">CONTACTO</button>
+            <button class="nav-btn" onclick="showSection('pedidos')">PEDIDOS</button>
         </div>
     </nav>
 
     <div class="container">
-        <!-- Sección Inicio -->
         <section id="home" class="section active home-section">
             <h1>Deliciosos Crepes</h1>
             
@@ -278,7 +341,6 @@
             </div>
         </section>
 
-        <!-- Sección Menú -->
         <section id="menu" class="section menu-section">
             <h2>Nuestro Menú</h2>
             
@@ -286,7 +348,7 @@
                 <div class="menu-card">
                     <h3>🍓 Crepe de Fresas</h3>
                     <p>Delicioso crepe con fresas frescas, crema batida y un toque de azúcar glass</p>
-                    <div class="price">S/12</div>
+                    <div class="price">S/.12</div>
                 </div>
                 
                 <div class="menu-card">
@@ -300,57 +362,54 @@
                     <p>Crepe con jamón, queso, champiñones y espinacas frescas</p>
                     <div class="price">S/12</div>
                 </div>
-                
-                <div class="menu-card">
-                    <h3>🥭 Crepe Tropical</h3>
-                    <p>Crepe con mango, coco rallado, miel y un toque de limón</p>
-                    <div class="price">S/15</div>
-                </div>
-                
+
                 <div class="menu-card">
                     <h3>🍎 Crepe de Manzana</h3>
                     <p>Crepe con manzanas caramelizadas, canela y helado de vainilla</p>
                     <div class="price">S/11</div>
                 </div>
-                
-                <div class="menu-card">
-                    <h3>🥓 Crepe Campestre</h3>
-                    <p>Crepe con tocino, huevo, queso cheddar y cebollín</p>
-                    <div class="price">S/9</div>
-                </div>
             </div>
         </section>
 
-        <!-- Sección Contacto -->
-        <section id="contact" class="section contact-section">
-            <h2>Contáctanos</h2>
+        <section id="pedidos" class="section pedidos-section">
+            <h2>Pedidos</h2>
             
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">📱</div>
+            <div class="pedidos-grid">
+                <div class="pedidos-card">
+                    <div class="pedidos-icon">📱</div>
                     <h3>Teléfono</h3>
-                    <p><a href="https://wa.me/51901226519" target="_blank" style="color: #25d366; text-decoration: none;">+51 901 226 519</a></p>
-                    <p><a href="https://wa.me/51913223751" target="_blank" style="color: #25d366; text-decoration: none;">+51 913 223 751</a></p>
-                    <p><a href="https://wa.me/51946127711" target="_blank" style="color: #25d366; text-decoration: none;">+51 946 127 711</a></p>
+                    <p> 📞 Pedidos(Kiara):<a href="https://wa.me/51901226519" target="_blank" style="color: #25d366; text-decoration: none;">+51 901 226 519</a></p>
+                    <p> 📞 Pedidos(Fernando): <a href="https://wa.me/51913223751" target="_blank" style="color: #25d366; text-decoration: none;">+51 913 223 751</a></p>
+                    <p> 📞 Consultas(David):<a href="https://wa.me/51946127711" target="_blank" style="color: #25d366; text-decoration: none;">+51 946 127 711</a></p>
+                    <p> 📞 Pedidos(Daniel):<a href="https://wa.me/51981986729" target="_blank" style="color: #25d366; text-decoration: none;">+51 981 986 729</a></p>
+                    <p> 📞 Consultas(Andy):<a href="https://wa.me/51965190129" target="_blank" style="color: #25d366; text-decoration: none;">+51 965 190 129</a></p>
                 </div>
                 
-                <div class="contact-card">
-                    <div class="contact-icon">📍</div>
+                <div class="pedidos-card">
+                    <div class="pedidos-icon">📍</div>
                     <h3>Ubicación</h3>
                     <p>Lima, Perú<br>Delivery a todo Lima</p>
                 </div>
                 
-                <div class="contact-card">
-                    <div class="contact-icon">🕒</div>
+                <div class="pedidos-card">
+                    <div class="pedidos-icon">🕒</div>
                     <h3>Horarios</h3>
-                    <p>Lunes a Domingo<br>9:00 AM - 10:00 PM</p>
+                    <p>Lunes a Viernes<br>1:00 PM - 10 PM</p>
                 </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">💬</div>
-                    <h3>WhatsApp Directo</h3>
-                    <p><a href="https://wa.me/51901226519?text=¡Hola! Me interesan sus deliciosos crepes" target="_blank" style="color: #25d366; text-decoration: none; font-weight: bold;">¡Escríbenos ahora!</a></p>
-                    <p style="font-size: 14px; margin-top: 10px;">Respuesta inmediata</p>
+            </div>
+
+            <div class="social-section">
+                <h3>Síguenos en Redes Sociales</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/deliciososcreepes" target="_blank">
+                        <div class="social-icon">📸</div>
+                        <div class="social-name">Instagram</div>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@fer32151" target="_blank">
+                        <div class="social-icon">🎵</div>
+                        <div class="social-name">TikTok</div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -358,22 +417,18 @@
 
     <script>
         function showSection(sectionName) {
-            // Ocultar todas las secciones
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
                 section.classList.remove('active');
             });
             
-            // Mostrar la sección seleccionada
             document.getElementById(sectionName).classList.add('active');
             
-            // Actualizar botones activos
             const buttons = document.querySelectorAll('.nav-btn');
             buttons.forEach(button => {
                 button.classList.remove('active');
             });
             
-            // Marcar el botón activo
             event.target.classList.add('active');
         }
     </script>
