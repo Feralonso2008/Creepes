@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deliciosos Crepes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 15px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 -2px 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .search-text {
+            color: #ffd700;
+            font-size: 16px;
+            font-weight: bold;
+            margin-right: 20px;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #d4af37, #ffd700);
+            color: black;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-btn:hover {
+            background: linear-gradient(45deg, #ffd700, #d4af37);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px 100px;
+        }
+
+        .section {
+            display: none;
+            min-height: 80vh;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .home-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        h1 {
+            font-size: 100px;
+            margin-bottom: 30px;
+            text-shadow: 3px 3px 6px rgba(255, 255, 255, 0.3);
+        }
+
+        .home-image {
+            margin: 40px 0;
+        }
+
+        .home-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .home-text {
+            font-size: 24px;
+            margin: 20px 0;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .menu-section h2 {
+            text-align: center;
+            font-size: 60px;
+            margin-bottom: 50px;
+            color: #ffd700;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .menu-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffd700;
+        }
+
+        .menu-card h3 {
+            color: #ffd700;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .menu-card p {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .pedidos-section h2 {
+            text-align: center;
+            font-size: 60px;
+            margin-bottom: 50px;
+            color: #ffd700;
+        }
+
+        .pedidos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .pedidos-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .pedidos-icon {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .pedidos-card h3 {
+            color: #ffd700;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .pedidos-card p {
+            font-size: 18px;
+        }
+
+        .social-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .social-section h3 {
+            color: #ffd700;
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            text-decoration: none;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: scale(1.15);
+        }
+
+        .social-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        .social-name {
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 60px;
+            }
+
+            .nav-container {
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .search-text {
+                font-size: 14px;
+                margin-right: 10px;
+                order: -1;
+                flex-basis: 100%;
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .menu-section h2,
+            .pedidos-section h2 {
+                font-size: 40px;
+            }
+
+            .home-image img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .home-text {
+                font-size: 18px;
+            }
+
+            .social-section h3 {
+                font-size: 28px;
+            }
+
+            .social-links {
+                gap: 30px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 {
+                font-size: 40px;
+            }
+
+            .nav-container {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+
+            .container {
+                padding: 15px 15px 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <span class="search-text">presiona estos botones 👉</span>
+            <button class="nav-btn active" onclick="showSection('home')">INICIO</button>
+            <button class="nav-btn" onclick="showSection('menu')">MENÚ</button>
+            <button class="nav-btn" onclick="showSection('pedidos')">PEDIDOS</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="home" class="section active home-section">
+            <h1>Deliciosos Crepes</h1>
+            
+            <div class="home-image">
+                <img src="Creepe.png" alt="Deliciosos Crepes">
+            </div>
+            
+            <div class="home-text">
+                <p>¿QUIERES PROBAR ALGO PARA ENDULZAR TU VIDA O ALGO MENOS DULCE?</p>
+                <br>
+                <p>¡ESTÁS EN EL LUGAR CORRECTO!</p>
+                <br>
+                <p>COMPRE UN CREPE Y DESCUBRA SUS DELICIOSAS OPCIONES</p>
+            </div>
+        </section>
+
+        <section id="menu" class="section menu-section">
+            <h2>Nuestro Menú</h2>
+            
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <h3>🍓 Crepe de Fresas</h3>
+                    <p>Delicioso crepe con fresas frescas, crema batida y un toque de azúcar glass</p>
+                    <div class="price">S/.12</div>
+                </div>
+                
+                <div class="menu-card">
+                    <h3>🍫 Crepe de Chocolate</h3>
+                    <p>Crepe relleno de chocolate derretido, plátano y nueces</p>
+                    <div class="price">S/14</div>
+                </div>
+                
+                <div class="menu-card">
+                    <h3>🧀 Crepe Salado</h3>
+                    <p>Crepe con jamón, queso, champiñones y espinacas frescas</p>
+                    <div class="price">S/12</div>
+                </div>
+
+                <div class="menu-card">
+                    <h3>🍎 Crepe de Manzana</h3>
+                    <p>Crepe con manzanas caramelizadas, canela y helado de vainilla</p>
+                    <div class="price">S/11</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pedidos" class="section pedidos-section">
+            <h2>Pedidos</h2>
+            
+            <div class="pedidos-grid">
+                <div class="pedidos-card">
+                    <div class="pedidos-icon">📱</div>
+                    <h3>Teléfono</h3>
+                    <p> 📞 Pedidos(Kiara):<a href="https://wa.me/51901226519" target="_blank" style="color: #25d366; text-decoration: none;">+51 901 226 519</a></p>
+                    <p> 📞 Pedidos(Fernando): <a href="https://wa.me/51913223751" target="_blank" style="color: #25d366; text-decoration: none;">+51 913 223 751</a></p>
+                    <p> 📞 Consultas(David):<a href="https://wa.me/51946127711" target="_blank" style="color: #25d366; text-decoration: none;">+51 946 127 711</a></p>
+                    <p> 📞 Pedidos(Daniel):<a href="https://wa.me/51981986729" target="_blank" style="color: #25d366; text-decoration: none;">+51 981 986 729</a></p>
+                    <p> 📞 Consultas(Andy):<a href="https://wa.me/51965190129" target="_blank" style="color: #25d366; text-decoration: none;">+51 965 190 129</a></p>
+                </div>
+                
+                <div class="pedidos-card">
+                    <div class="pedidos-icon">📍</div>
+                    <h3>Ubicación</h3>
+                    <p>Lima, Perú<br>Delivery a todo Lima</p>
+                </div>
+                
+                <div class="pedidos-card">
+                    <div class="pedidos-icon">🕒</div>
+                    <h3>Horarios</h3>
+                    <p>Lunes a Viernes<br>1:00 PM - 10 PM</p>
+                </div>
+            </div>
+
+            <div class="social-section">
+                <h3>Síguenos en Redes Sociales</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/deliciososcreepes" target="_blank">
+                        <div class="social-icon">📸</div>
+                        <div class="social-name">Instagram</div>
+                    </a>
+
+                    <a href="https://www.tiktok.com/@fer32151" target="_blank">
+                        <div class="social-icon">🎵</div>
+                        <div class="social-name">TikTok</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(sectionName) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.getElementById(sectionName).classList.add('active');
+            
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
